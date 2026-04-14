@@ -8,6 +8,7 @@
 // Price value: Sora 18px 700 #00A63E
 // Meta (countries): Sora 14px 400 #777777
 
+import { Link } from "wouter";
 import type { Package } from "@/lib/packages-data";
 
 interface PackageCardProps {
@@ -24,8 +25,8 @@ export default function PackageCard({ pkg }: PackageCardProps) {
     }).format(price);
 
   return (
-    <a
-      href="#"
+    <Link
+      href={`/packages/${pkg.slug}`}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -162,6 +163,6 @@ export default function PackageCard({ pkg }: PackageCardProps) {
           {pkg.countries.join(" · ")}
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
