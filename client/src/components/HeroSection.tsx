@@ -1,50 +1,56 @@
-// HeroSection — exact clone of hollaamericana.com banner section
-// Structure: 550px section with background-image (CSS), title bottom-left
-// Title: Sora 56px 600 weight, white, uppercase, padding 0 32px, margin-bottom 32px
-// Section is flex align-items:flex-end
+// HeroSection — responsive banner section
+// Desktop: 550px height, title 56px
+// Mobile: 320px height, title 36px, padding reduced
 
 const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/hero-packages_6bed9359.jpg";
 
 export default function HeroSection() {
   return (
-    <section
-      style={{
-        height: "550px",
-        display: "flex",
-        alignItems: "flex-end",
-        backgroundImage: `url(${HERO_IMAGE})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        margin: 0,
-        padding: 0,
-        width: "100%",
-      }}
-    >
-      {/* Section content with title */}
-      <div
+    <>
+      <section
+        className="hero-section"
         style={{
-          maxWidth: "1440px",
+          display: "flex",
+          alignItems: "flex-end",
+          backgroundImage: `url(${HERO_IMAGE})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          margin: 0,
+          padding: 0,
           width: "100%",
-          margin: "0 auto",
-          padding: "0",
         }}
       >
-        <h1
-          style={{
-            fontFamily: "'Sora', sans-serif",
-            fontSize: "56px",
-            fontWeight: 600,
-            color: "#ffffff",
-            textTransform: "uppercase",
-            padding: "0 32px",
-            margin: "0 0 32px 0",
-            letterSpacing: "normal",
-          }}
-        >
-          PACKAGES
-        </h1>
-      </div>
-    </section>
+        <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", padding: "0" }}>
+          <h1 className="hero-title">PACKAGES</h1>
+        </div>
+      </section>
+
+      <style>{`
+        .hero-section {
+          height: 550px;
+        }
+        .hero-title {
+          font-family: 'Sora', sans-serif;
+          font-size: 56px;
+          font-weight: 600;
+          color: #ffffff;
+          text-transform: uppercase;
+          padding: 0 32px;
+          margin: 0 0 32px 0;
+          letter-spacing: normal;
+        }
+        @media (max-width: 767px) {
+          .hero-section {
+            height: 300px;
+          }
+          .hero-title {
+            font-size: 36px;
+            padding: 0 20px;
+            margin: 0 0 20px 0;
+          }
+        }
+      `}</style>
+    </>
   );
 }

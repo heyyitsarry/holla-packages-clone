@@ -1,122 +1,251 @@
-// Navbar — pixel-perfect clone of hollaamericana.com header
-// Font: Sora 16.8px 700 brand, Sora 16px 400 nav links
-// Position: fixed, transparent bg, z-index 999, padding 24px 16px
-// Inner: flex space-between, padding 16px 32px, maxWidth 1440px
-// Logo: 48x48 circle, border-radius 999px
-// Brand lines: Sora 16.8px 700 #111111, letterSpacing 0.4px, lineHeight 17.64px
-// Nav: flex, gap 48px
-// Nav link: Sora 16px 400 #111111, letterSpacing 2px, uppercase, no underline
-// Active nav link: border-bottom 1px solid #111111
+// Navbar — translucent frosted-glass with scroll transition + mobile hamburger
+// At top: transparent bg, dark text
+// On scroll: rgba(255,255,255,0.88) + backdrop-filter blur(14px) + border-bottom
+// Mobile: hamburger icon, slide-down menu overlay
+// Transition: all 0.3s ease on background, backdrop-filter, box-shadow
+
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/logo_218f958e.jpg";
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const navLinks = [
+    { label: "HOME", href: "/" },
+    { label: "ABOUT", href: "/about" },
+    { label: "DESTINATIONS", href: "/destinations" },
+    { label: "CONTACT", href: "/#contact" },
+  ];
+
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 999,
-        backgroundColor: "transparent",
-        padding: "24px 16px",
-      }}
-    >
-      <div
+    <>
+      <header
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "16px 32px",
-          maxWidth: "1440px",
-          margin: "0 auto",
-        }}
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 999,
+          backgroundColor: scrolled ? "rgba(255,255,255,0.88)" : "transparent",
+          backdropFilter: scrolled ? "blur(14px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
+          boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.08)" : "none",
+          transition: "background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease",
+        } as React.CSSProperties}
       >
-        {/* Brand */}
         <div
           style={{
             display: "flex",
+            justifyContent: "space-between",
             alignItems: "center",
-            gap: "12px",
-            cursor: "pointer",
-            textDecoration: "none",
+            padding: "14px 24px",
+            maxWidth: "1440px",
+            margin: "0 auto",
           }}
         >
-          <img
-            src={LOGO_URL}
-            alt="Holla Americana Logo"
-            style={{
-              width: "48px",
-              height: "48px",
-              borderRadius: "999px",
-              objectFit: "cover",
-              flexShrink: 0,
-            }}
-          />
-          <span
+          {/* Brand */}
+          <div
+            onClick={() => { navigate("/"); setMenuOpen(false); }}
             style={{
               display: "flex",
-              flexDirection: "column",
+              alignItems: "center",
+              gap: "10px",
+              cursor: "pointer",
+              textDecoration: "none",
+              flexShrink: 0,
             }}
+          >
+            <img
+              src={LOGO_URL}
+              alt="Holla Americana Logo"
+              style={{
+                width: "44px",
+                height: "44px",
+                borderRadius: "999px",
+                objectFit: "cover",
+                flexShrink: 0,
+              }}
+            />
+            <span style={{ display: "flex", flexDirection: "column" }}>
+              <span
+                style={{
+                  fontFamily: "'Sora', system-ui, sans-serif",
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  color: "#111111",
+                  letterSpacing: "0.4px",
+                  lineHeight: "17px",
+                  display: "block",
+                }}
+              >
+                HOLLA
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Sora', system-ui, sans-serif",
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  color: "#111111",
+                  letterSpacing: "0.4px",
+                  lineHeight: "17px",
+                  display: "block",
+                }}
+              >
+                AMERICANA
+              </span>
+            </span>
+          </div>
+
+          {/* Desktop Nav Links */}
+          <nav
+            style={{
+              display: "flex",
+              gap: "40px",
+              alignItems: "center",
+            }}
+            className="desktop-nav"
+          >
+            {navLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                style={{
+                  fontFamily: "'Sora', sans-serif",
+                  fontSize: "14px",
+                  fontWeight: 400,
+                  color: "#111111",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  transition: "opacity 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+            style={{
+              display: "none",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "8px",
+              flexDirection: "column",
+              gap: "5px",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            className="hamburger-btn"
           >
             <span
               style={{
-                fontFamily: "'Sora', system-ui, sans-serif",
-                fontSize: "16.8px",
-                fontWeight: 700,
-                color: "#111111",
-                letterSpacing: "0.4px",
-                lineHeight: "17.64px",
                 display: "block",
+                width: "22px",
+                height: "2px",
+                backgroundColor: "#111111",
+                borderRadius: "2px",
+                transition: "transform 0.25s ease, opacity 0.25s ease",
+                transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
               }}
-            >
-              HOLLA
-            </span>
+            />
             <span
               style={{
-                fontFamily: "'Sora', system-ui, sans-serif",
-                fontSize: "16.8px",
-                fontWeight: 700,
-                color: "#111111",
-                letterSpacing: "0.4px",
-                lineHeight: "17.64px",
                 display: "block",
+                width: "22px",
+                height: "2px",
+                backgroundColor: "#111111",
+                borderRadius: "2px",
+                transition: "opacity 0.25s ease",
+                opacity: menuOpen ? 0 : 1,
               }}
-            >
-              AMERICANA
-            </span>
-          </span>
+            />
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "2px",
+                backgroundColor: "#111111",
+                borderRadius: "2px",
+                transition: "transform 0.25s ease, opacity 0.25s ease",
+                transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+              }}
+            />
+          </button>
         </div>
 
-        {/* Nav Links */}
-        <nav style={{ display: "flex", gap: "48px", alignItems: "center" }}>
-          {[
-            { label: "HOME", href: "/", active: false },
-            { label: "ABOUT", href: "/about", active: false },
-            { label: "DESTINATIONS", href: "/destinations", active: false },
-            { label: "CONTACT", href: "/#contact", active: false },
-          ].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              style={{
-                fontFamily: "'Sora', sans-serif",
-                fontSize: "16px",
-                fontWeight: 400,
-                color: "#111111",
-                letterSpacing: "2px",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                borderBottom: item.active ? "1px solid #111111" : "none",
-                paddingBottom: item.active ? "2px" : "0",
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </header>
+        {/* Mobile Menu Dropdown */}
+        <div
+          style={{
+            overflow: "hidden",
+            maxHeight: menuOpen ? "300px" : "0",
+            transition: "max-height 0.3s ease",
+            backgroundColor: "rgba(255,255,255,0.96)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            borderTop: menuOpen ? "1px solid rgba(0,0,0,0.08)" : "none",
+          } as React.CSSProperties}
+        >
+          <nav style={{ display: "flex", flexDirection: "column", padding: "8px 24px 16px" }}>
+            {navLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  fontFamily: "'Sora', sans-serif",
+                  fontSize: "14px",
+                  fontWeight: 500,
+                  color: "#111111",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  padding: "12px 0",
+                  borderBottom: "1px solid rgba(0,0,0,0.06)",
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* Responsive styles injected via <style> */}
+      <style>{`
+        @media (max-width: 767px) {
+          .desktop-nav { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+      `}</style>
+    </>
   );
 }

@@ -1,16 +1,6 @@
-// Home Page — pixel-perfect clone of hollaamericana.com/packages/
-// DOM structure mirrors original:
-//   <header fixed> (Navbar)
-//   <main class="listing-page">
-//     <section class="banner section"> (hero 550px, img absolute z-1, h1 bottom-left)
-//     <div class="content section"> (padding 64px 16px)
-//       <div class="section-content" maxWidth 1440px>
-//         <div class="filters-section">
-//           <div class="category-section"> (gesture-carousel)
-//           <div class="filters"> (country + price + reset)
-//           <p showing count>
-//         <div class="cards-section"> (grid 4 cols, gap 24px, padding 24px 16px)
-//   <footer>
+// Home Page — responsive clone of hollaamericana.com/packages/
+// Cards: 4 cols desktop, 2 cols tablet (≥640px), 1 col mobile
+// Content padding: 64px 32px desktop, 32px 16px mobile
 
 import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
@@ -47,9 +37,7 @@ export default function Home() {
     }
 
     if (selectedCountry) {
-      result = result.filter((pkg) =>
-        pkg.countries.includes(selectedCountry)
-      );
+      result = result.filter((pkg) => pkg.countries.includes(selectedCountry));
     }
 
     if (selectedPriceRange !== "All Prices") {
@@ -66,90 +54,83 @@ export default function Home() {
   }, [selectedCategories, selectedCountry, selectedPriceRange]);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#ffffff", fontFamily: "'Sora', sans-serif" }}>
-      {/* Fixed Header */}
-      <Navbar />
+    <>
+      <div style={{ minHeight: "100vh", backgroundColor: "#ffffff", fontFamily: "'Sora', sans-serif" }}>
+        <Navbar />
+        <main>
+          <HeroSection />
 
-      {/* Main content — listing-page */}
-      <main>
-        {/* Banner section */}
-        <HeroSection />
+          <div className="home-content">
+            <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
+              <FilterSection
+                selectedCategories={selectedCategories}
+                selectedCountry={selectedCountry}
+                selectedPriceRange={selectedPriceRange}
+                onCategoryToggle={handleCategoryToggle}
+                onCountryChange={setSelectedCountry}
+                onPriceRangeChange={setSelectedPriceRange}
+                onReset={handleReset}
+                resultCount={filteredPackages.length}
+              />
 
-        {/* Content section */}
-        <div style={{ padding: "64px 16px", backgroundColor: "#ffffff" }}>
-          <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
-            {/* Filters section */}
-            <FilterSection
-              selectedCategories={selectedCategories}
-              selectedCountry={selectedCountry}
-              selectedPriceRange={selectedPriceRange}
-              onCategoryToggle={handleCategoryToggle}
-              onCountryChange={setSelectedCountry}
-              onPriceRangeChange={setSelectedPriceRange}
-              onReset={handleReset}
-              resultCount={filteredPackages.length}
-            />
-
-            {/* Cards section */}
-            {filteredPackages.length > 0 ? (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                  gap: "24px",
-                  marginTop: "24px",
-                  alignItems: "start",
-                }}
-              >
-                {filteredPackages.map((pkg) => (
-                  <PackageCard key={pkg.id} pkg={pkg} />
-                ))}
-              </div>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "80px 0",
-                  textAlign: "center",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "'Sora', sans-serif",
-                    fontSize: "18px",
-                    color: "#666666",
-                    marginBottom: "16px",
-                  }}
-                >
-                  No packages found matching your filters.
-                </p>
-                <button
-                  onClick={handleReset}
-                  style={{
-                    backgroundColor: "#ffffff",
-                    color: "#333333",
-                    border: "1px solid #E5E5E5",
-                    borderRadius: "8px",
-                    padding: "8px 14px",
-                    fontFamily: "'Sora', sans-serif",
-                    fontSize: "16px",
-                    fontWeight: 400,
-                    cursor: "pointer",
-                  }}
-                >
-                  Reset Filters
-                </button>
-              </div>
-            )}
+              {filteredPackages.length > 0 ? (
+                <div className="cards-grid">
+                  {filteredPackages.map((pkg) => (
+                    <PackageCard key={pkg.id} pkg={pkg} />
+                  ))}
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 0", textAlign: "center" }}>
+                  <p style={{ fontFamily: "'Sora', sans-serif", fontSize: "18px", color: "#666666", marginBottom: "16px" }}>
+                    No packages found matching your filters.
+                  </p>
+                  <button
+                    onClick={handleReset}
+                    style={{ backgroundColor: "#ffffff", color: "#333333", border: "1px solid #E5E5E5", borderRadius: "8px", padding: "10px 18px", fontFamily: "'Sora', sans-serif", fontSize: "15px", cursor: "pointer" }}
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+        <Footer />
+      </div>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+      <style>{`
+        .home-content {
+          padding: 56px 32px;
+          background-color: #ffffff;
+        }
+        .cards-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 24px;
+          margin-top: 24px;
+          align-items: start;
+        }
+        @media (max-width: 1023px) {
+          .cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        @media (max-width: 767px) {
+          .home-content {
+            padding: 28px 16px;
+          }
+          .cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+          }
+        }
+        @media (max-width: 479px) {
+          .cards-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+        }
+      `}</style>
+    </>
   );
 }
