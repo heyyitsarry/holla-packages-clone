@@ -3,12 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* 
-  Design: Expedition Cartography — Holla Americana Clone
-  Colors: Dark hero, electric green (#00C853) accents, white cards
-  Typography: Bebas Neue (headings) + DM Sans (body)
-*/
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -33,41 +27,67 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-brand-green: oklch(0.72 0.22 145);
-  --color-brand-yellow: oklch(0.88 0.18 88);
-  --color-brand-dark: oklch(0.13 0.01 260);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.15 0.01 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 260);
-  --primary: oklch(0.72 0.22 145);
+  --primary: oklch(0.45 0.15 145);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0.002 260);
-  --secondary-foreground: oklch(0.3 0.01 260);
-  --muted: oklch(0.96 0.002 260);
-  --muted-foreground: oklch(0.55 0.01 260);
-  --accent: oklch(0.96 0.002 260);
-  --accent-foreground: oklch(0.15 0.01 260);
+  --radius: 0.65rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.98 0 0);
+  --secondary-foreground: oklch(0.3 0 0);
+  --muted: oklch(0.967 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.967 0 0);
+  --accent-foreground: oklch(0.1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.9 0.003 260);
-  --input: oklch(0.9 0.003 260);
-  --ring: oklch(0.72 0.22 145);
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.92 0 0);
+  --ring: oklch(0.45 0.15 145);
+  --chart-1: oklch(0.45 0.15 145);
+  --chart-2: oklch(0.55 0.15 145);
+  --chart-3: oklch(0.65 0.15 145);
+  --chart-4: oklch(0.35 0.15 145);
+  --chart-5: oklch(0.25 0.15 145);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.1 0 0);
+  --sidebar-primary: oklch(0.45 0.15 145);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.967 0 0);
+  --sidebar-accent-foreground: oklch(0.1 0 0);
+  --sidebar-border: oklch(0.92 0 0);
+  --sidebar-ring: oklch(0.45 0.15 145);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Sora', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -110,20 +130,13 @@
       max-width: 1280px;
     }
   }
+}
 
-  .font-bebas {
-    font-family: 'Bebas Neue', 'DM Sans', sans-serif;
-  }
-
-  .brand-green {
-    color: #00C853;
-  }
-
-  .bg-brand-green {
-    background-color: #00C853;
-  }
-
-  .border-brand-green {
-    border-color: #00C853;
-  }
+/* Hide scrollbar for category carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

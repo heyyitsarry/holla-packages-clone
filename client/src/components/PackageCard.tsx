@@ -1,6 +1,12 @@
-// PackageCard — individual tour package card
-// Design: white card, image top, title/duration/price/countries below
-// Green price accent (#00C853), hover lift effect
+// PackageCard — pixel-perfect clone of hollaamericana.com package-card
+// Card: white bg, 1px solid #EEEEEE border, border-radius 12px, box-shadow rgba(0,0,0,0.06) 0px 2px 8px
+// Image: 220px height, object-fit cover, no border-radius (overflow hidden on card)
+// Body: padding 22px, display flex, flex-direction column, gap 12px
+// Title: Sora 22px 600 #000000, line-height 33px
+// Duration: Sora 16px 400 #666666
+// Price prefix: Sora 13.5px 500 #00A63E
+// Price value: Sora 18px 700 #00A63E
+// Meta (countries): Sora 14px 400 #777777
 
 import type { Package } from "@/lib/packages-data";
 
@@ -20,72 +26,141 @@ export default function PackageCard({ pkg }: PackageCardProps) {
   return (
     <a
       href="#"
-      className="group block bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-      style={{ textDecoration: "none" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#ffffff",
+        border: "1px solid #EEEEEE",
+        borderRadius: "12px",
+        boxShadow: "rgba(0, 0, 0, 0.06) 0px 2px 8px 0px",
+        overflow: "hidden",
+        textDecoration: "none",
+        cursor: "pointer",
+        transition: "box-shadow 0.2s ease, transform 0.2s ease",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.boxShadow = "rgba(0, 0, 0, 0.12) 0px 4px 16px 0px";
+        (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-2px)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.boxShadow = "rgba(0, 0, 0, 0.06) 0px 2px 8px 0px";
+        (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
+      }}
     >
-      {/* Card Image */}
-      <div className="relative overflow-hidden" style={{ height: "200px" }}>
+      {/* Card Media */}
+      <div
+        style={{
+          height: "220px",
+          overflow: "hidden",
+          display: "block",
+        }}
+      >
         <img
           src={pkg.image}
           alt={pkg.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
+          style={{
+            width: "100%",
+            height: "220px",
+            objectFit: "cover",
+            display: "block",
+          }}
         />
       </div>
 
-      {/* Card Content */}
-      <div className="p-4">
+      {/* Card Body */}
+      <div
+        style={{
+          padding: "22px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          flex: 1,
+        }}
+      >
         {/* Title */}
-        <h3
-          className="font-bold text-gray-900 mb-1 leading-snug"
+        <div
           style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: "0.95rem",
-            fontWeight: 700,
-            lineHeight: 1.35,
+            fontFamily: "'Sora', sans-serif",
+            fontSize: "22px",
+            fontWeight: 600,
+            color: "#000000",
+            lineHeight: "33px",
+            margin: 0,
           }}
         >
           {pkg.title}
-        </h3>
+        </div>
 
         {/* Duration */}
-        <p
-          className="text-gray-500 mb-2"
-          style={{ fontSize: "0.82rem", fontFamily: "'DM Sans', sans-serif" }}
+        <div
+          style={{
+            fontFamily: "'Sora', sans-serif",
+            fontSize: "16px",
+            fontWeight: 400,
+            color: "#666666",
+            margin: 0,
+          }}
         >
           {pkg.days} Days / {pkg.nights} Nights
-        </p>
+        </div>
 
         {/* Price */}
         {pkg.price !== null ? (
-          <p
-            className="mb-1"
-            style={{ fontSize: "0.88rem", fontFamily: "'DM Sans', sans-serif" }}
+          <div
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "18px",
+              color: "#00A63E",
+              fontWeight: 600,
+              margin: 0,
+            }}
           >
-            <span className="text-gray-500">Starting from </span>
             <span
-              className="font-bold"
-              style={{ color: "#00C853", fontSize: "1rem" }}
+              style={{
+                fontSize: "13.5px",
+                fontWeight: 500,
+                color: "#00A63E",
+                marginRight: "4px",
+              }}
+            >
+              Starting from
+            </span>
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: 700,
+                color: "#00A63E",
+              }}
             >
               {formatPrice(pkg.price)}
             </span>
-          </p>
+          </div>
         ) : (
-          <p
-            className="mb-1 text-gray-400 italic"
-            style={{ fontSize: "0.85rem" }}
+          <div
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "13.5px",
+              fontWeight: 500,
+              color: "#00A63E",
+            }}
           >
             Price on request
-          </p>
+          </div>
         )}
 
-        {/* Countries */}
-        <p
-          className="text-gray-500"
-          style={{ fontSize: "0.8rem", fontFamily: "'DM Sans', sans-serif" }}
+        {/* Countries / Meta */}
+        <div
+          style={{
+            fontFamily: "'Sora', sans-serif",
+            fontSize: "14px",
+            fontWeight: 400,
+            color: "#777777",
+            margin: 0,
+          }}
         >
           {pkg.countries.join(" · ")}
-        </p>
+        </div>
       </div>
     </a>
   );

@@ -1,8 +1,16 @@
-// FilterSection — categories, country dropdown, price range, reset button
-// Design: white bg, green active chips, yellow reset button, DM Sans typography
+// FilterSection — pixel-perfect clone of hollaamericana.com filter section
+// Font: Sora throughout
+// Category chips: 120x110px, transparent bg, 2px transparent border
+// Active chip: 2px solid #00A63E, bg #EAF9EA
+// Icon: SVG mask icons from hollaamericana.com/icons/*.svg, grey color #757575, 34x34px
+// Dropdowns: pill-shaped border-radius 100px, white bg, Sora 18px, padding 16px 32px
+// Reset button: white bg, 1px solid #E5E5E5, border-radius 8px, padding 8px 14px
+// "Categories" label: Sora 18px 400 black
+// "You can select multiple": Sora 15px #A3A3A3
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { CATEGORIES, COUNTRIES, PRICE_RANGES } from "@/lib/packages-data";
+import { ICON_DATA_URIS } from "@/lib/icon-data";
 
 interface FilterSectionProps {
   selectedCategories: string[];
@@ -15,6 +23,9 @@ interface FilterSectionProps {
   resultCount: number;
 }
 
+// Icon map uses base64-encoded data URIs (imported from icon-data.ts) for reliable rendering
+const ICON_MAP = ICON_DATA_URIS;
+
 export default function FilterSection({
   selectedCategories,
   selectedCountry,
@@ -26,13 +37,11 @@ export default function FilterSection({
   resultCount,
 }: FilterSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
     }
   };
@@ -41,210 +50,294 @@ export default function FilterSection({
     checkScroll();
   }, []);
 
-  // Category icon mapping (SVG-like icons using emoji for simplicity matching original)
-  const getCategoryIcon = (id: string) => {
-    const icons: Record<string, string> = {
-      adventure: "⛺",
-      amazon: "🌿",
-      beaches: "🏖️",
-      cities: "🏙️",
-      culture: "🎭",
-      desert: "🏜️",
-      "eco-lodge": "🌱",
-      glaciers: "🧊",
-      "grand-tours": "🗺️",
-      "group-tours": "👥",
-      heritage: "🏛️",
-      history: "📜",
-      lakes: "💧",
-      luxury: "💎",
-      mountains: "⛰️",
-      "multi-country": "🌎",
-      nature: "🌳",
-      patagonia: "🦅",
-      "salt-flats": "🪨",
-      wildlife: "🦜",
-      wonders: "✨",
-    };
-    return icons[id] || "🌍";
-  };
-
   return (
-    <div className="bg-white border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
-        {/* Categories Row */}
-        <div className="mb-5">
-          <div className="flex items-center gap-3 mb-3">
-            <span
-              className="font-semibold text-gray-900"
-              style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem" }}
-            >
-              Categories
-            </span>
-            <span
-              className="text-gray-400"
-              style={{ fontSize: "0.82rem", fontFamily: "'DM Sans', sans-serif" }}
-            >
-              You can select multiple
-            </span>
-          </div>
+    <div>
+      {/* Category section */}
+      <div style={{ marginBottom: "24px" }}>
+        {/* Title row */}
+        <div
+          style={{
+            fontFamily: "'Sora', sans-serif",
+            fontSize: "18px",
+            fontWeight: 400,
+            color: "#000000",
+            marginBottom: "0px",
+          }}
+        >
+          Categories
+          <span
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "15px",
+              color: "#A3A3A3",
+              marginLeft: "6px",
+            }}
+          >
+            You can select multiple
+          </span>
+        </div>
 
-          {/* Scrollable categories strip */}
-          <div className="relative">
-            {canScrollLeft && (
-              <button
-                onClick={() => {
-                  scrollRef.current?.scrollBy({ left: -200, behavior: "smooth" });
-                }}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full w-8 h-8 flex items-center justify-center border border-gray-200 hover:bg-gray-50"
-              >
-                ‹
-              </button>
-            )}
-            <div
-              ref={scrollRef}
-              className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              onScroll={checkScroll}
-            >
-              {CATEGORIES.map((cat) => {
-                const isActive = selectedCategories.includes(cat.id);
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => onCategoryToggle(cat.id)}
-                    className="flex-shrink-0 flex flex-col items-center gap-1 px-3 py-2 rounded-lg border-2 transition-all duration-200 min-w-[72px]"
+        {/* Scrollable carousel */}
+        <div style={{ position: "relative" }}>
+          <div
+            ref={scrollRef}
+            style={{
+              display: "flex",
+              gap: "12px",
+              overflowX: "auto",
+              padding: "20px 0",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            } as React.CSSProperties}
+            onScroll={checkScroll}
+          >
+            {CATEGORIES.map((cat) => {
+              const isActive = selectedCategories.includes(cat.id);
+              const iconUrl = ICON_MAP[cat.id] || "https://www.hollaamericana.com/icons/Default.svg";
+              return (
+                <div
+                  key={cat.id}
+                  onClick={() => onCategoryToggle(cat.id)}
+                  style={{
+                    flexShrink: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "120px",
+                    height: "110px",
+                    borderRadius: "14px",
+                    border: isActive ? "2px solid #00A63E" : "2px solid transparent",
+                    backgroundColor: isActive ? "#EAF9EA" : "transparent",
+                    cursor: "pointer",
+                    transition: "border-color 0.15s, background-color 0.15s",
+                  }}
+                >
+                  {/* Icon using img tag for reliable cross-browser rendering */}
+                  <div
                     style={{
-                      borderColor: isActive ? "#00C853" : "#E5E7EB",
-                      backgroundColor: isActive ? "#F0FFF4" : "#FAFAFA",
-                      color: isActive ? "#00C853" : "#6B7280",
+                      width: "48px",
+                      height: "48px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    <span style={{ fontSize: "1.3rem", lineHeight: 1 }}>
-                      {getCategoryIcon(cat.id)}
-                    </span>
-                    <span
+                    <img
+                      src={iconUrl}
+                      alt=""
+                      aria-hidden="true"
                       style={{
-                        fontSize: "0.7rem",
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontWeight: 500,
-                        whiteSpace: "nowrap",
-                        color: isActive ? "#00C853" : "#374151",
+                        width: "40px",
+                        height: "40px",
+                        objectFit: "contain",
+                        filter: isActive
+                          ? "invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%)"
+                          : "none",
+                        transition: "filter 0.15s",
+                        opacity: isActive ? 1 : 0.75,
                       }}
-                    >
-                      {cat.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-            {canScrollRight && (
-              <button
-                onClick={() => {
-                  scrollRef.current?.scrollBy({ left: 200, behavior: "smooth" });
-                }}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md rounded-full w-8 h-8 flex items-center justify-center border border-gray-200 hover:bg-gray-50"
-              >
-                ›
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Country + Price + Reset Row */}
-        <div className="flex flex-wrap items-end gap-4">
-          {/* Country Dropdown */}
-          <div className="flex-1 min-w-[200px] max-w-sm">
-            <label
-              className="block text-gray-700 font-medium mb-1.5"
-              style={{ fontSize: "0.88rem", fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Country
-            </label>
-            <div className="relative">
-              <select
-                value={selectedCountry}
-                onChange={(e) => onCountryChange(e.target.value)}
-                className="w-full appearance-none border border-gray-300 rounded-lg px-4 py-2.5 pr-10 bg-white text-gray-700 focus:outline-none focus:border-green-500 transition-colors"
-                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem" }}
-              >
-                <option value="">Select...</option>
-                {COUNTRIES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
+                    />
+                  </div>
+                  {/* Label */}
+                  <div
+                    style={{
+                      fontFamily: "'Sora', sans-serif",
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      color: "#000000",
+                      marginTop: "8px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {cat.label}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Price Range Dropdown */}
-          <div className="flex-1 min-w-[200px] max-w-sm">
-            <label
-              className="block text-gray-700 font-medium mb-1.5"
-              style={{ fontSize: "0.88rem", fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Price Range
-            </label>
-            <div className="relative">
-              <select
-                value={selectedPriceRange}
-                onChange={(e) => onPriceRangeChange(e.target.value)}
-                className="w-full appearance-none border border-gray-300 rounded-lg px-4 py-2.5 pr-10 bg-white text-gray-700 focus:outline-none focus:border-green-500 transition-colors"
-                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem" }}
-              >
-                {PRICE_RANGES.map((r) => (
-                  <option key={r.label} value={r.label}>
-                    {r.label}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Reset Filters Button */}
-          <div className="flex flex-col justify-end">
+          {/* Right scroll indicator */}
+          {canScrollRight && (
             <button
-              onClick={onReset}
-              className="px-5 py-2.5 rounded-lg font-semibold transition-all duration-200 hover:brightness-95 active:scale-95"
+              onClick={() => scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" })}
               style={{
-                backgroundColor: "#FFD600",
-                color: "#1A1A1A",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.88rem",
-                fontWeight: 600,
-                letterSpacing: "0.02em",
-                border: "none",
-                marginBottom: "0px",
+                position: "absolute",
+                right: 0,
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                backgroundColor: "#ffffff",
+                border: "1px solid #E5E5E5",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                zIndex: 10,
+                fontSize: "16px",
+                color: "#333",
               }}
             >
-              Reset Filters
+              ›
             </button>
+          )}
+        </div>
+      </div>
+
+      {/* Filter row: Country + Price + Reset */}
+      <div
+        style={{
+          display: "flex",
+          gap: "24px",
+          alignItems: "flex-start",
+        }}
+      >
+        {/* Country Dropdown */}
+        <div style={{ flex: 1 }}>
+          <p
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "18px",
+              fontWeight: 400,
+              color: "#000000",
+              margin: "0 0 8px 0",
+            }}
+          >
+            Country
+          </p>
+          <div style={{ position: "relative" }}>
+            <select
+              value={selectedCountry}
+              onChange={(e) => onCountryChange(e.target.value)}
+              style={{
+                width: "100%",
+                appearance: "none",
+                WebkitAppearance: "none",
+                backgroundColor: "#ffffff",
+                border: "1px solid rgba(0,0,0,0.23)",
+                borderRadius: "100px",
+                padding: "16px 48px 16px 32px",
+                fontFamily: "'Sora', sans-serif",
+                fontSize: "18px",
+                color: "rgba(0,0,0,0.87)",
+                cursor: "pointer",
+                outline: "none",
+              } as React.CSSProperties}
+            >
+              <option value="">Select...</option>
+              {COUNTRIES.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+            <div
+              style={{
+                position: "absolute",
+                right: "16px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                pointerEvents: "none",
+                color: "rgba(0,0,0,0.54)",
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 10l5 5 5-5z" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        {/* Results Count */}
-        <div className="mt-4">
+        {/* Price Range Dropdown */}
+        <div style={{ flex: 1 }}>
           <p
-            className="text-gray-500"
-            style={{ fontSize: "0.85rem", fontFamily: "'DM Sans', sans-serif" }}
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "18px",
+              fontWeight: 400,
+              color: "#000000",
+              margin: "0 0 8px 0",
+            }}
           >
-            Showing{" "}
-            <span className="font-semibold text-gray-700">{resultCount}</span>{" "}
-            package{resultCount !== 1 ? "s" : ""}
+            Price Range
           </p>
+          <div style={{ position: "relative" }}>
+            <select
+              value={selectedPriceRange}
+              onChange={(e) => onPriceRangeChange(e.target.value)}
+              style={{
+                width: "100%",
+                appearance: "none",
+                WebkitAppearance: "none",
+                backgroundColor: "#ffffff",
+                border: "1px solid rgba(0,0,0,0.23)",
+                borderRadius: "100px",
+                padding: "16px 48px 16px 32px",
+                fontFamily: "'Sora', sans-serif",
+                fontSize: "18px",
+                color: "rgba(0,0,0,0.87)",
+                cursor: "pointer",
+                outline: "none",
+              } as React.CSSProperties}
+            >
+              {PRICE_RANGES.map((r) => (
+                <option key={r.label} value={r.label}>{r.label}</option>
+              ))}
+            </select>
+            <div
+              style={{
+                position: "absolute",
+                right: "16px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                pointerEvents: "none",
+                color: "rgba(0,0,0,0.54)",
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 10l5 5 5-5z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Reset Filters Button */}
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+          <p style={{ margin: "0 0 8px 0", visibility: "hidden", fontSize: "18px", fontFamily: "'Sora', sans-serif" }}>x</p>
+          <button
+            onClick={onReset}
+            style={{
+              backgroundColor: "#ffffff",
+              color: "#333333",
+              border: "1px solid #E5E5E5",
+              borderRadius: "8px",
+              padding: "8px 14px",
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "16px",
+              fontWeight: 400,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Reset Filters
+          </button>
         </div>
       </div>
+
+      {/* Showing X packages */}
+      <p
+        style={{
+          fontFamily: "'Sora', sans-serif",
+          fontSize: "14px",
+          color: "#666666",
+          fontWeight: 400,
+          marginTop: "16px",
+          marginBottom: 0,
+        }}
+      >
+        Showing {resultCount} package{resultCount !== 1 ? "s" : ""}
+      </p>
     </div>
   );
 }

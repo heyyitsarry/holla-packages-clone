@@ -1,6 +1,16 @@
-// Home Page — Holla Americana Packages Clone
-// Assembles: Navbar, HeroSection, FilterSection, PackageGrid, Footer
-// Design: Expedition Cartography — dark hero, green accents, DM Sans body
+// Home Page — pixel-perfect clone of hollaamericana.com/packages/
+// DOM structure mirrors original:
+//   <header fixed> (Navbar)
+//   <main class="listing-page">
+//     <section class="banner section"> (hero 550px, img absolute z-1, h1 bottom-left)
+//     <div class="content section"> (padding 64px 16px)
+//       <div class="section-content" maxWidth 1440px>
+//         <div class="filters-section">
+//           <div class="category-section"> (gesture-carousel)
+//           <div class="filters"> (country + price + reset)
+//           <p showing count>
+//         <div class="cards-section"> (grid 4 cols, gap 24px, padding 24px 16px)
+//   <footer>
 
 import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
@@ -30,21 +40,18 @@ export default function Home() {
   const filteredPackages = useMemo(() => {
     let result = PACKAGES;
 
-    // Filter by categories
     if (selectedCategories.length > 0) {
       result = result.filter((pkg) =>
         selectedCategories.some((cat) => pkg.categories.includes(cat))
       );
     }
 
-    // Filter by country
     if (selectedCountry) {
       result = result.filter((pkg) =>
         pkg.countries.includes(selectedCountry)
       );
     }
 
-    // Filter by price range
     if (selectedPriceRange !== "All Prices") {
       const range = PRICE_RANGES.find((r) => r.label === selectedPriceRange);
       if (range) {
@@ -59,58 +66,85 @@ export default function Home() {
   }, [selectedCategories, selectedCountry, selectedPriceRange]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      {/* Hero with Navbar overlaid */}
-      <div className="relative">
-        <Navbar />
+    <div style={{ minHeight: "100vh", backgroundColor: "#ffffff", fontFamily: "'Sora', sans-serif" }}>
+      {/* Fixed Header */}
+      <Navbar />
+
+      {/* Main content — listing-page */}
+      <main>
+        {/* Banner section */}
         <HeroSection />
-      </div>
 
-      {/* Filter Section */}
-      <FilterSection
-        selectedCategories={selectedCategories}
-        selectedCountry={selectedCountry}
-        selectedPriceRange={selectedPriceRange}
-        onCategoryToggle={handleCategoryToggle}
-        onCountryChange={setSelectedCountry}
-        onPriceRangeChange={setSelectedPriceRange}
-        onReset={handleReset}
-        resultCount={filteredPackages.length}
-      />
+        {/* Content section */}
+        <div style={{ padding: "64px 16px", backgroundColor: "#ffffff" }}>
+          <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
+            {/* Filters section */}
+            <FilterSection
+              selectedCategories={selectedCategories}
+              selectedCountry={selectedCountry}
+              selectedPriceRange={selectedPriceRange}
+              onCategoryToggle={handleCategoryToggle}
+              onCountryChange={setSelectedCountry}
+              onPriceRangeChange={setSelectedPriceRange}
+              onReset={handleReset}
+              resultCount={filteredPackages.length}
+            />
 
-      {/* Package Grid */}
-      <main className="flex-1 bg-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
-          {filteredPackages.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {filteredPackages.map((pkg) => (
-                <PackageCard key={pkg.id} pkg={pkg} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center py-24 text-center">
-              <div className="text-5xl mb-4">🌎</div>
-              <h3
-                className="text-gray-700 font-semibold mb-2"
-                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.1rem" }}
+            {/* Cards section */}
+            {filteredPackages.length > 0 ? (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                  gap: "24px",
+                  marginTop: "24px",
+                  alignItems: "start",
+                }}
               >
-                No packages found
-              </h3>
-              <p
-                className="text-gray-400"
-                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem" }}
+                {filteredPackages.map((pkg) => (
+                  <PackageCard key={pkg.id} pkg={pkg} />
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "80px 0",
+                  textAlign: "center",
+                }}
               >
-                Try adjusting your filters to find the perfect tour.
-              </p>
-              <button
-                onClick={handleReset}
-                className="mt-5 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all hover:brightness-95"
-                style={{ backgroundColor: "#FFD600", color: "#1A1A1A", fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Reset Filters
-              </button>
-            </div>
-          )}
+                <p
+                  style={{
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: "18px",
+                    color: "#666666",
+                    marginBottom: "16px",
+                  }}
+                >
+                  No packages found matching your filters.
+                </p>
+                <button
+                  onClick={handleReset}
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#333333",
+                    border: "1px solid #E5E5E5",
+                    borderRadius: "8px",
+                    padding: "8px 14px",
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: "16px",
+                    fontWeight: 400,
+                    cursor: "pointer",
+                  }}
+                >
+                  Reset Filters
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </main>
 
