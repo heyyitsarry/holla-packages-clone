@@ -22,7 +22,7 @@ export default function HeroSection() {
         }}
       >
         <div style={{ maxWidth: "1440px", width: "100%", margin: "0 auto", padding: "0" }}>
-          <h1 className="hero-title">PACKAGES</h1>
+          <h1 className="hero-title">DESTINATIONS</h1>
         </div>
       </section>
 
