@@ -7,7 +7,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/logo_218f958e.jpg";
+const LOGO_URL = "/images/logo.jpg";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

@@ -3,7 +3,7 @@
 // Mobile: single column stack, centered
 // Font: Sora throughout
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/logo_218f958e.jpg";
+const LOGO_URL = "/images/logo.jpg";
 
 export default function Footer() {
   return (

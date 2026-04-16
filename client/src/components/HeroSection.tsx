@@ -2,7 +2,7 @@
 // Desktop: 550px height, title 56px
 // Mobile: 320px height, title 36px, padding reduced
 
-const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/hero-packages_6bed9359.jpg";
+const HERO_IMAGE = "/images/hero-packages.jpg";
 
 export default function HeroSection() {
   return (
