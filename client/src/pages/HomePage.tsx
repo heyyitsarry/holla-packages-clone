@@ -40,13 +40,13 @@ const ICONS = {
 const COUNTRIES = ["Peru", "Brazil", "Argentina", "Chile", "Bolivia", "Colombia", "Costa Rica", "Mexico"];
 
 const DESTINATIONS = [
-  { countries: "Peru", title: "Inca Express • Peru", image: "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80", slug: "inca-express-peru" },
-  { countries: "Brazil, Argentina, Chile, Peru", title: "4 Nations Journey", image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80", slug: "4-nations-journey" },
-  { countries: "Brazil, Argentina, Chile, Bolivia, Peru", title: "5 Countries Grand Tour", image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80", slug: "5-countries-grand-tour" },
-  { countries: "Brazil, Argentina, Chile, Bolivia, Peru", title: "Latin America Grand Tour", image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80", slug: "latin-america-grand-tour" },
-  { countries: "Peru", title: "Peru Group Tour", image: "https://images.unsplash.com/photo-1580502304784-8985b7eb7260?w=600&q=80", slug: "peru-group-tour" },
-  { countries: "Brazil, Argentina, Chile, Peru", title: "Brazil • Argentina • Chile • Peru", image: "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?w=600&q=80", slug: "brazil-argentina-chile-peru" },
-  { countries: "Brazil, Argentina, Chile, Bolivia, Peru", title: "Brazil • Argentina • Chile • Bolivia • Peru", image: "https://images.unsplash.com/photo-1547558902-c0e053ade894?w=600&q=80", slug: "5-countries-tour" },
+  { countries: "Peru", title: "Inca Express • Peru", image: "/images/tours/photo-1526392060635-9d6019884377.jpg", slug: "inca-express-peru" },
+  { countries: "Brazil, Argentina, Chile, Peru", title: "4 Nations Journey", image: "/images/tours/photo-1483729558449-99ef09a8c325.jpg", slug: "4-nations-journey" },
+  { countries: "Brazil, Argentina, Chile, Bolivia, Peru", title: "5 Countries Grand Tour", image: "/images/tours/photo-1469854523086-cc02fe5d8800.jpg", slug: "5-countries-grand-tour" },
+  { countries: "Brazil, Argentina, Chile, Bolivia, Peru", title: "Latin America Grand Tour", image: "/images/tours/photo-1501854140801-50d01698950b.jpg", slug: "latin-america-grand-tour" },
+  { countries: "Peru", title: "Peru Group Tour", image: "/images/tours/photo-1580502304784-8985b7eb7260.jpg", slug: "peru-group-tour" },
+  { countries: "Brazil, Argentina, Chile, Peru", title: "Brazil • Argentina • Chile • Peru", image: "/images/tours/photo-1518639192441-8fce0a366e2e.jpg", slug: "brazil-argentina-chile-peru" },
+  { countries: "Brazil, Argentina, Chile, Bolivia, Peru", title: "Brazil • Argentina • Chile • Bolivia • Peru", image: "/images/tours/photo-1547558902-c0e053ade894.jpg", slug: "5-countries-tour" },
 ];
 
 const SERVICES = [
