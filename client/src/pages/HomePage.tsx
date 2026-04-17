@@ -25,10 +25,9 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { PACKAGES as packages, type Package } from "@/lib/packages-data";
 
-// Local image paths (migrated from CDN) + CDN URLs for large media files
-const VIDEO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/intro_f1833344.mp4";
+// All local image paths — no external CDN dependency
 const LOGO_URL = "/images/logo.jpg";
-const SERVICES_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663451557766/jkbf5zEb7ZR2fZ38BvZD8g/services_3cdf067f.jpg";
+const SERVICES_IMG = "/images/hero-packages.jpg"; // Using local hero image as services section background
 const ICONS = {
   plane: "/images/plane.png",
   people: "/images/people.png",
@@ -218,12 +217,21 @@ function HeroSection() {
   return (
     <section style={{ width: "100%", height: "100dvh", position: "relative", overflow: "hidden" }}>
       {/* Video background */}
-      <video
-        autoPlay loop muted playsInline
-        style={{ objectFit: "cover", zIndex: -1, width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}
-      >
-        <source src={VIDEO_URL} type="video/mp4" />
-      </video>
+      {/* Static background image instead of video */}
+      <div
+        style={{
+          backgroundImage: `url(${SERVICES_IMG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      />
 
       {/* Dark overlay + content */}
       <div style={{
