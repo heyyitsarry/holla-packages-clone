@@ -434,7 +434,7 @@ function PackagesSection() {
               <img src={pkg.image} alt={pkg.title} style={{ width: "100%", height: "180px", objectFit: "cover", display: "block" }} />
               <div style={{ padding: "1rem" }}>
                 <h3 style={{ fontFamily: "Sora, sans-serif", fontSize: "15px", fontWeight: 600, color: "#111111", margin: "0 0 0.4rem 0", lineHeight: 1.3 }}>{pkg.title}</h3>
-                <p style={{ fontFamily: "Sora, sans-serif", fontSize: "13px", color: "#666666", margin: "0 0 0.75rem 0" }}>{pkg.duration}</p>
+                <p style={{ fontFamily: "Sora, sans-serif", fontSize: "13px", color: "#666666", margin: "0 0 0.75rem 0" }}>{pkg.days} Days / {pkg.nights} Nights</p>
                 <div>
                   <span style={{ fontFamily: "Sora, sans-serif", fontSize: "12px", color: "#00A63E" }}>Starting from</span>
                   <div style={{ fontFamily: "Sora, sans-serif", fontSize: "16px", fontWeight: 700, color: "#00A63E" }}>{pkg.price}</div>
@@ -575,7 +575,7 @@ function EnquirySection() {
       {/* Background image */}
       <div style={{
         position: "absolute", inset: 0,
-        backgroundImage: "url(https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1600&q=80)",
+        backgroundImage: "url(/images/tours/photo-1483729558449-99ef09a8c325.jpg)",
         backgroundSize: "cover", backgroundPosition: "center",
         filter: "brightness(0.5)",
       }} />

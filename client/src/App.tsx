@@ -7,6 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
 import Home from "./pages/Home";
 import PackageDetail from "./pages/PackageDetail";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 function Router() {
   return (
@@ -15,6 +17,10 @@ function Router() {
       <Route path={"/"} component={HomePage} />
       {/* Destinations/Packages listing — hollaamericana.com/packages/ */}
       <Route path={"/destinations"} component={Home} />
+      {/* About page */}
+      <Route path={"/about"} component={AboutPage} />
+      {/* Contact page */}
+      <Route path={"/contact"} component={ContactPage} />
       {/* Package detail pages */}
       <Route path={"/packages/:slug"} component={PackageDetail} />
       <Route path={"/404"} component={NotFound} />
