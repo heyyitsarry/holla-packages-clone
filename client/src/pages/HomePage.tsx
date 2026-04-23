@@ -96,13 +96,10 @@ function Navbar() {
             boxShadow: scrolled ? "rgba(0,0,0,0.2) 0px 4px 30px" : "none",
             transition: "background 0.3s, border-radius 0.3s, box-shadow 0.3s, padding 0.3s",
           }}>
-            {/* Brand */}
-            <div onClick={() => { navigate("/"); setMenuOpen(false); }} style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", textDecoration: "none" }}>
-              <img src={LOGO_URL} alt="Holla Americana" style={{ width: "36px", height: "36px", borderRadius: "999px", objectFit: "cover", transition: "0.2s" }} />
-              <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", lineHeight: "1.05" }}>
-                <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px", transition: "color 0.3s" }}>ORCHID</span>
-                <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.65rem", fontWeight: 600, color: "#E91E63", letterSpacing: "0.3px", transition: "color 0.3s" }}>by Vandana</span>
-              </div>
+            {/* Brand - Placeholder for new branding */}
+            <div onClick={() => { navigate("/"); setMenuOpen(false); }} style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", textDecoration: "none", minHeight: "40px" }}>
+              {/* TODO: Replace with new logo and branding */}
+              <div style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 600, color: linkColor, opacity: 0.5 }}>Brand Logo</div>
             </div>
 
             {/* Desktop Nav */}
@@ -176,49 +173,35 @@ function Navbar() {
 function HeroSection() {
   const [, navigate] = useLocation();
   return (
-    <section style={{ width: "100%", height: "100dvh", position: "relative", overflow: "hidden", background: "#ffffff" }}>
-      {/* Orchid flower background - watermark style */}
+    <section style={{ width: "100%", height: "100dvh", position: "relative", overflow: "hidden" }}>
+      {/* Background image */}
       <div
         style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 0,
+          backgroundImage: `url(${SERVICES_IMG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
           width: "100%",
           height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          pointerEvents: "none",
+          position: "absolute",
+          top: 0,
+          left: 0,
         }}
-      >
-        <img
-          src={LOGO_URL}
-          alt="Orchid Vacations"
-          style={{
-            maxWidth: "70%",
-            maxHeight: "90%",
-            objectFit: "contain",
-            opacity: 0.08,
-          }}
-        />
-      </div>
+      />
 
-      {/* Content overlay */}
+      {/* Dark overlay + content */}
       <div style={{
-        textAlign: "center", zIndex: 1, color: "#111111",
+        textAlign: "center", zIndex: 1, color: "#ffffff",
+        background: "linear-gradient(rgba(2,2,2,0.5) 0%, rgba(2,2,2,0.5) 100%)",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
         gap: "3rem", height: "100%", position: "relative",
       }}>
-        {/* Title - ORCHID VACATIONS with logo */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "2rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <img src={LOGO_URL} alt="Orchid Logo" style={{ width: "100px", height: "100px", objectFit: "contain" }} />
-            <h1 style={{ fontFamily: "Sora, sans-serif", fontSize: "clamp(48px, 8vw, 80px)", fontWeight: 700, color: "#111111", margin: 0, lineHeight: 1.2, letterSpacing: "3px" }}>
-              ORCHID<br />VACATIONS
-            </h1>
-          </div>
+        {/* Title - ORCHID VACATIONS */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+          <h1 style={{ fontFamily: "Sora, sans-serif", fontSize: "clamp(48px, 8vw, 88px)", fontWeight: 700, color: "#ffffff", margin: 0, lineHeight: 1.2, letterSpacing: "3px" }}>
+            ORCHID<br />VACATIONS
+          </h1>
         </div>
 
         {/* BOOK NOW button */}
@@ -242,7 +225,7 @@ function HeroSection() {
           {COUNTRIES.map(c => (
             <span key={c} style={{
               fontFamily: "Sora, sans-serif", fontSize: "13px", fontWeight: 400,
-              color: "#111111", border: "1px solid #00A63E",
+              color: "#ffffff", border: "1px solid rgba(255,255,255,0.6)",
               borderRadius: "100px", padding: "0.3rem 0.9rem",
               cursor: "pointer", transition: "0.2s",
             }}>{c}</span>
