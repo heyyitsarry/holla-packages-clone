@@ -3,7 +3,7 @@
 // Mobile: single column stack, centered
 // Font: Sora throughout
 
-const LOGO_URL = "/images/logo.jpg";
+const LOGO_URL = "/images/orchid-logo-official.png";
 
 export default function Footer() {
   return (
@@ -23,7 +23,7 @@ export default function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <img
                 src={LOGO_URL}
-                alt="Brand Logo"
+                alt="Orchid Vacations by Vandana Logo"
                 style={{
                   width: "90px",
                   height: "90px",
@@ -42,7 +42,7 @@ export default function Footer() {
                   lineHeight: "1.7",
                 }}
               >
-                Explore the best destinations with our expert-crafted travel experiences.
+                Discover unforgettable South American adventures with Orchid Vacations by Vandana. Expert-curated experiences, personalized service, and premium travel moments.
               </p>
               {/* Social Icons */}
               <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>

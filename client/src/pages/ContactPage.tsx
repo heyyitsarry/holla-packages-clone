@@ -50,8 +50,8 @@ function Navbar() {
           <div onClick={() => navigate("/")} style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer" }}>
             <img src={LOGO_URL} alt="Holla Americana" style={{ width: "36px", height: "36px", borderRadius: "999px", objectFit: "cover" }} />
             <div style={{ display: "flex", flexDirection: "column", lineHeight: "1.05" }}>
-              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>HOLLA</span>
-              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>AMERICANA</span>
+              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>ORCHID</span>
+              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.8rem", fontWeight: 600, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>by Vandana</span>
             </div>
           </div>
 
@@ -85,7 +85,7 @@ function Footer() {
           <div>
             <img src={LOGO_URL} alt="Holla Americana" style={{ width: "50px", height: "50px", borderRadius: "999px", objectFit: "cover", marginBottom: "1rem" }} />
             <p style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", color: "#666666", lineHeight: "1.6" }}>
-              Holla Americana is dedicated to opening a world of South American travel for adventurous holidaymakers from India, the GCC, and the global Indian diaspora.
+              Orchid Vacations by Vandana is dedicated to opening a world of South American travel for adventurous holidaymakers from India, the GCC, and the global Indian diaspora.
             </p>
           </div>
           <div>
@@ -106,8 +106,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div style={{ borderTop: "1px solid #EEEEEE", paddingTop: "2rem", textAlign: "center", fontSize: "0.85rem", color: "#999999", fontFamily: "Sora, sans-serif" }}>
-          © 2024 Holla Americana. All rights reserved.
+          <div style={{ borderTop: "1px solid #EEEEEE", paddingTop: "2rem", textAlign: "center", fontSize: "0.85rem", color: "#999999", fontFamily: "Sora, sans-serif" }}>
+          © 2024 Orchid Vacations by Vandana. All rights reserved.
         </div>
       </div>
     </footer>

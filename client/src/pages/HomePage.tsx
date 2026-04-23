@@ -24,9 +24,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { PACKAGES as packages, type Package } from "@/lib/packages-data";
+import ReviewsSection from "@/components/ReviewsSection";
+import ClientTestimonials from "@/components/ClientTestimonials";
 
 // All local image paths — no external CDN dependency
-const LOGO_URL = "/images/logo.jpg";
+const LOGO_URL = "/images/orchid-logo-official.png";
 const SERVICES_IMG = "/images/hero-packages.jpg"; // Using local hero image as services section background
 const ICONS = {
   plane: "/images/plane.png",
@@ -129,8 +131,8 @@ function Navbar() {
             <div onClick={() => { navigate("/"); setMenuOpen(false); }} style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", textDecoration: "none" }}>
               <img src={LOGO_URL} alt="Holla Americana" style={{ width: "36px", height: "36px", borderRadius: "999px", objectFit: "cover", transition: "0.2s" }} />
               <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", lineHeight: "1.05" }}>
-                <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px", transition: "color 0.3s" }}>HOLLA</span>
-                <span style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px", transition: "color 0.3s" }}>AMERICANA</span>
+                <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px", transition: "color 0.3s" }}>ORCHID</span>
+                <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.65rem", fontWeight: 600, color: "#E91E63", letterSpacing: "0.3px", transition: "color 0.3s" }}>by Vandana</span>
               </div>
             </div>
 
@@ -785,6 +787,8 @@ export default function HomePage() {
       <PackagesSection />
       <ServicesSection />
       <EnquirySection />
+      <ClientTestimonials />
+      <ReviewsSection />
       <FAQSection />
       <Footer />
     </div>

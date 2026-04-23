@@ -57,8 +57,8 @@ function Navbar() {
           <div onClick={() => navigate("/")} style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer" }}>
             <img src={LOGO_URL} alt="Holla Americana" style={{ width: "36px", height: "36px", borderRadius: "999px", objectFit: "cover" }} />
             <div style={{ display: "flex", flexDirection: "column", lineHeight: "1.05" }}>
-              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>HOLLA</span>
-              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>AMERICANA</span>
+              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", fontWeight: 700, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>ORCHID</span>
+              <span style={{ fontFamily: "Sora, sans-serif", fontSize: "0.8rem", fontWeight: 600, color: linkColor, textTransform: "uppercase", letterSpacing: "0.4px" }}>by Vandana</span>
             </div>
           </div>
 
@@ -92,7 +92,7 @@ function Footer() {
           <div>
             <img src={LOGO_URL} alt="Holla Americana" style={{ width: "50px", height: "50px", borderRadius: "999px", objectFit: "cover", marginBottom: "1rem" }} />
             <p style={{ fontFamily: "Sora, sans-serif", fontSize: "0.9rem", color: "#666666", lineHeight: "1.6" }}>
-              Holla Americana is dedicated to opening a world of South American travel for adventurous holidaymakers from India, the GCC, and the global Indian diaspora.
+              Orchid Vacations by Vandana is dedicated to opening a world of South American travel for adventurous holidaymakers from India, the GCC, and the global Indian diaspora.
             </p>
           </div>
           <div>
@@ -113,8 +113,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div style={{ borderTop: "1px solid #EEEEEE", paddingTop: "2rem", textAlign: "center", fontSize: "0.85rem", color: "#999999", fontFamily: "Sora, sans-serif" }}>
-          © 2024 Holla Americana. All rights reserved.
+          <div style={{ borderTop: "1px solid #EEEEEE", paddingTop: "2rem", textAlign: "center", fontSize: "0.85rem", color: "#999999", fontFamily: "Sora, sans-serif" }}>
+          © 2024 Orchid Vacations by Vandana. All rights reserved.
         </div>
       </div>
     </footer>
@@ -151,7 +151,7 @@ export default function AboutPage() {
               We make South America feel like home.
             </h2>
             <p style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", color: "#555555", lineHeight: "1.8", marginBottom: "1.5rem" }}>
-              Founded in August 2024, Holla Americana is dedicated to opening a world of South American travel for adventurous holidaymakers from India, the GCC, and the global Indian diaspora. Our mission is to make this vibrant continent feel familiar, welcoming, and effortlessly accessible through well-crafted, trustworthy travel experiences.
+              Founded in August 2024, Orchid Vacations by Vandana is dedicated to opening a world of South American travel for adventurous holidaymakers from India, the GCC, and the global Indian diaspora. Our mission is to make this vibrant continent feel familiar, welcoming, and effortlessly accessible through well-crafted, trustworthy travel experiences.
             </p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {[
@@ -176,7 +176,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
           <h2 style={{ fontFamily: "Sora, sans-serif", fontSize: "2.2rem", fontWeight: 700, marginBottom: "2rem" }}>Our Story</h2>
           <p style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", color: "#555555", lineHeight: "1.8", marginBottom: "1.5rem" }}>
-            Holla Americana was created to bridge the gap between curious travelers from India and the Middle East and the extraordinary diversity of South America. While the continent is rich in nature, color, and culture, it still remains underexplored by many travelers from this region.
+            Orchid Vacations by Vandana was created to bridge the gap between curious travelers from India and the Middle East and the extraordinary diversity of South America. While the continent is rich in nature, color, and culture, it still remains underexplored by many travelers from this region.
           </p>
           <p style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", color: "#555555", lineHeight: "1.8" }}>
             Our team works closely with trusted local partners to curate reliable, ready-reference holiday options for both direct travelers and B2B partners. Through our exclusive website, we help travel agents and tour operators confidently promote and sell South America with strong product knowledge, excellent service standards, and competitive pricing.
@@ -192,7 +192,7 @@ export default function AboutPage() {
             <h3 style={{ fontFamily: "Sora, sans-serif", fontSize: "1.8rem", fontWeight: 700, marginBottom: "0.5rem" }}>Meet Our Founder</h3>
             <p style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", color: "#00A63E", fontWeight: 600, marginBottom: "1.5rem" }}>Sunil Kallyat</p>
             <p style={{ fontFamily: "Sora, sans-serif", fontSize: "1rem", color: "#555555", lineHeight: "1.8", marginBottom: "1.5rem" }}>
-              Sunil Kallyat is a visionary whose life and leadership have been shaped by a deep respect for travel as a force for understanding, connection, and transformation. With an exceptional foundation in aviation leadership and years of experience guiding complex travel operations, he built Holla Americana on an unwavering principle: true reliability is the cornerstone of every meaningful journey.
+              Sunil Kallyat is a visionary whose life and leadership have been shaped by a deep respect for travel as a force for understanding, connection, and transformation. With an exceptional foundation in aviation leadership and years of experience guiding complex travel operations, he built Orchid Vacations by Vandana on an unwavering principle: true reliability is the cornerstone of every meaningful journey.
             </p>
             <blockquote style={{ fontFamily: "Sora, sans-serif", fontSize: "1.1rem", fontStyle: "italic", color: "#00A63E", borderLeft: "4px solid #00A63E", paddingLeft: "1.5rem", margin: "1.5rem 0" }}>
               "South America is a continent of surprises. Our goal is to make discovering it feel effortless and exciting for travelers from our part of the world."

@@ -7,7 +7,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
-const LOGO_URL = "/images/logo.jpg";
+const LOGO_URL = "/images/orchid-logo-official.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -79,7 +79,7 @@ export default function Navbar() {
           >
             <img
               src={LOGO_URL}
-              alt="Holla Americana Logo"
+              alt="Orchid Vacations by Vandana Logo"
               style={{
                 width: "44px",
                 height: "44px",
@@ -100,20 +100,20 @@ export default function Navbar() {
                   display: "block",
                 }}
               >
-                HOLLA
+                ORCHID
               </span>
               <span
                 style={{
                   fontFamily: "'Sora', system-ui, sans-serif",
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  color: "#111111",
-                  letterSpacing: "0.4px",
-                  lineHeight: "17px",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#E91E63",
+                  letterSpacing: "0.3px",
+                  lineHeight: "15px",
                   display: "block",
                 }}
               >
-                AMERICANA
+                by Vandana
               </span>
             </span>
           </div>
